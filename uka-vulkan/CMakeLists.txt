@@ -5,4 +5,4 @@ file(GLOB SOURCES
 *.cpp)
 add_library(${LIB_NAME} STATIC ${SOURCES})
 find_package(Vulkan REQUIRED)
-target_link_libraries(${LIB_NAME} Vulkan::Vulkan ktx glm)
+target_link_libraries(${LIB_NAME} Vulkan::Vulkan ktx glm tinygltf)

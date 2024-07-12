@@ -5,3 +5,7 @@
 	path = 3rdparty/ktx
 	url = https://github.com/KhronosGroup/KTX-Software.git
 	branch = 4.2
+[submodule "3rdparty/tinygltf"]
+	path = 3rdparty/tinygltf
+	url = https://github.com/syoyo/tinygltf.git
+	branch = release
