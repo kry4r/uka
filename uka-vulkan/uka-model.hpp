@@ -24,7 +24,7 @@ namespace uka
 {
     namespace gltf
     {
-        enum descriptor_binding_flags
+        enum DescriptorBindingFlags
         {
             image_base_color =0x00000001,
             image_normal_map =0x00000002,
@@ -186,8 +186,9 @@ namespace uka
             std::string name;
             std::vector<AnimationSampler> samplers;
             std::vector<AnimationChannel> channels;
-            float start_time;
-            float end_time;
+            float start;
+            float end;
+
         };
 
         enum VertexComponent
@@ -281,21 +282,21 @@ namespace uka
 
             Model(){};
             ~Model();
-            auto loadNode(Node* parent, const tinygltf::Node& node, uint32_t nodeIndex, const tinygltf::Model& model, std::vector<uint32_t>& indexBuffer, std::vector<Vertex>& vertexBuffer, float globalscale) ->void;
-            auto loadSkins(tinygltf::Model& gltfModel) ->void;
-            auto loadImages(tinygltf::Model& gltfModel, Uka_Device* device, VkQueue transferQueue) ->void;
-            auto loadMaterials(tinygltf::Model& gltfModel) ->void;
-            auto loadAnimations(tinygltf::Model& gltfModel) ->void;
-            auto loadFromFile(std::string filename, Uka_Device* device, VkQueue transferQueue, LoadFlags fileLoadingFlags = LoadFlags::NONE, float scale = 1.0f) ->void;
-            auto bindBuffers(VkCommandBuffer commandBuffer) ->void;
-            auto drawNode(Node* node, VkCommandBuffer commandBuffer, uint32_t renderFlags = 0, VkPipelineLayout pipelineLayout = VK_NULL_HANDLE, uint32_t bindImageSet = 1) ->void;
-            auto draw(VkCommandBuffer commandBuffer, uint32_t renderFlags = 0, VkPipelineLayout pipelineLayout = VK_NULL_HANDLE, uint32_t bindImageSet = 1) ->void;
-            auto getNodeDimensions(Node* node, glm::vec3& min, glm::vec3& max) ->void;
-            auto getSceneDimensions() ->void;
+            auto load_node(uka::gltf::Node* parent, const tinygltf::Node& node, uint32_t node_index, const tinygltf::Model& model, std::vector<uint32_t>& index_buffer, std::vector<Vertex>& vertex_buffer, float global_scale) ->void;
+            auto load_skins(tinygltf::Model& gltf_model) ->void;
+            auto load_image(tinygltf::Model& gltf_model, uka::Uka_Device* device, VkQueue transfer_queue) ->void;
+            auto load_materials(tinygltf::Model& gltf_model) ->void;
+            auto load_animations(tinygltf::Model& gltf_model) ->void;
+            auto load_form_file(std::string filename, uka::Uka_Device* device, VkQueue transfer_queue, uka::gltf::LoadFlags file_loading_flags = LoadFlags::NONE, float scale = 1.0f) ->void;
+            auto bind_buffers(VkCommandBuffer commandbuffer) ->void;
+            auto draw_node(uka::gltf::Node* node, VkCommandBuffer commandbuffer, uint32_t render_flags = 0, VkPipelineLayout pipeline_layout = VK_NULL_HANDLE, uint32_t bind_image_set = 1) ->void;
+            auto draw(VkCommandBuffer commandbuffer, uint32_t render_flags = 0, VkPipelineLayout pipeline_layout = VK_NULL_HANDLE, uint32_t bind_image_set = 1) ->void;
+            auto get_node_dimensions(uka::gltf::Node* node, glm::vec3& min, glm::vec3& max) ->void;
+            auto get_scene_dimensions() ->void;
             auto updateAnimation(uint32_t index, float time) ->void;
-            auto findNode(Node* parent, uint32_t index) ->Node*;
-            auto nodeFromIndex(uint32_t index) ->Node*;
-            auto prepareNodeDescriptorSet(Node* node,VkDescriptorSetLayout descriptorSetLayout) ->void;
+            auto find_node(uka::gltf::Node* parent, uint32_t index) -> Node*;
+            auto node_from_index(uint32_t index) -> Node*;
+            auto prepare_node_descriptor_set(uka::gltf::Node* node,VkDescriptorSetLayout descriptor_set_layout) ->void;
         };
     };
 }

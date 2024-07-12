@@ -40,7 +40,7 @@ namespace uka{
         auto create_logical_device(VkPhysicalDeviceFeatures enabledFeatures, std::vector<const char *> enabledExtensions, void *pNextChain, bool useSwapChain = true, VkQueueFlags requestedQueueTypes = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT)->VkResult;
         auto create_buffer(VkBufferUsageFlags usage, VkMemoryPropertyFlags memory_properties, VkDeviceSize size, VkBuffer *buffer, VkDeviceMemory *memory, void *data = nullptr)->VkResult;
         auto create_buffer(VkBufferUsageFlags usage, VkMemoryPropertyFlags memory_properties, VkDeviceSize size, Uka_Buffer* buffer, VkDeviceMemory *memory, Uka_Buffer *data)->VkResult;
-        auto copy_buffer(Uka_Buffer* src, Uka_Buffer* dst, VkQueue queue, VkBufferCopy *copy_region)->VkResult;
+        auto copy_buffer(Uka_Buffer* src, Uka_Buffer* dst, VkQueue queue, VkBufferCopy *copy_region)->void;
         auto create_command_pool(uint32_t queueFamilyIndex, VkCommandPoolCreateFlags createFlags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT)->VkCommandPool;
         auto create_command_buffer(VkCommandBufferLevel level, bool begin = false)->VkCommandBuffer;
         auto create_command_buffer(VkCommandBufferLevel level, VkCommandPool pool, bool begin = false)->VkCommandBuffer;

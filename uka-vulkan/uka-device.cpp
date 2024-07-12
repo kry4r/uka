@@ -259,7 +259,7 @@ namespace uka
         return VK_SUCCESS;
     }
 
-    auto Uka_Device::copy_buffer(Uka_Buffer* src, Uka_Buffer* dst, VkQueue queue, VkBufferCopy *copy_region)->VkResult
+    auto Uka_Device::copy_buffer(Uka_Buffer* src, Uka_Buffer* dst, VkQueue queue, VkBufferCopy *copy_region)->void
     {
         assert(src->size >= dst->size);
         assert(src->buffer);
@@ -288,7 +288,9 @@ namespace uka
         return command_pool;
     }
 
-    auto Uka_Device::create_command_buffer(VkCommandBufferLevel level, bool begin)->VkCommandBuffer
+    auto Uka_Device::create_command_buffer(VkCommandBufferLevel level,
+        VkCommandPool pool,
+        bool begin) -> VkCommandBuffer
     {
         auto command_buffer_info = uka::init::command_buffer_allocate_info(command_pool, level, 1);
         auto command_buffer = VkCommandBuffer{};

@@ -232,7 +232,7 @@ namespace uka{
                                 subresourceRange.baseMipLevel = 0;
                                 subresourceRange.levelCount = 1;
                                 subresourceRange.layerCount = 1;
-                                set_image_layout(cmdbuffer, image, VK_IMAGE_ASPECT_COLOR_BIT, old_image_layout, new_image_layout, subresourceRange, srcStageMask, dstStageMask);
+                                set_image_layout(cmdbuffer, image,old_image_layout, new_image_layout, subresourceRange, srcStageMask, dstStageMask);
                             }
         auto insert_image_memort_barrier(VkCommandBuffer cmdbuffer, VkImage image, VkAccessFlags srcAccessMask, VkAccessFlags dstAccessMask, VkImageLayout oldImageLayout, VkImageLayout newImageLayout, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkImageSubresourceRange subresourceRange)->void
         {
