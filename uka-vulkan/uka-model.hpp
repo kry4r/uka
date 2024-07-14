@@ -39,7 +39,7 @@ namespace uka
 
         struct Texture
         {
-            Uka_Device* device = nullptr;
+            uka::Uka_Device* device = nullptr;
             VkImage image;
             VkImageLayout image_layout;
             VkDeviceMemory device_memory;
@@ -53,12 +53,12 @@ namespace uka
 
             auto update_descriptor() -> void;
             auto destroy() -> void;
-            auto from_gltf_image(const tinygltf::Image& gltf_image,std::string path, Uka_Device* device, VkQueue copy_queue) -> void;
+            auto from_gltf_image(const tinygltf::Image& gltf_image,std::string path, uka::Uka_Device* device, VkQueue copy_queue) -> void;
         };
 
         struct Material
         {
-            Uka_Device* device = nullptr;
+            uka::Uka_Device* device = nullptr;
             enum AlphaMode
             {
                 APLHA_OPAQUE,
@@ -79,7 +79,7 @@ namespace uka
             Texture* diffuse_texture = nullptr;
 
             VkDescriptorSet descriptor_set = VK_NULL_HANDLE;
-            Material(Uka_Device* device) : device(device) {}
+            Material(uka::Uka_Device* device) : device(device) {}
             auto create_descriptor_set(VkDescriptorPool descriptor_pool,VkDescriptorSetLayout descriptor_set_layout,uint32_t descriptor_binding_flags) -> void;
         };
 
@@ -107,7 +107,7 @@ namespace uka
         struct Mesh
         {
             std::vector<Primitive*> primitives;
-            Uka_Device* device;
+            uka::Uka_Device* device;
             std::string name;
 
             struct UniformBuffer
@@ -126,7 +126,7 @@ namespace uka
                 float joint_count{0};
             } uniform_block;
 
-            Mesh(Uka_Device* device,glm::mat4 matrix);
+            Mesh(uka::Uka_Device* device,glm::mat4 matrix);
             ~Mesh();
         };
 
@@ -244,7 +244,7 @@ namespace uka
             Texture empty_texture;
             auto create_empty_texture(VkQueue queue) -> void;
         public:
-            Uka_Device* device;
+            uka::Uka_Device* device;
             VkDescriptorPool descriptor_pool;
             struct Vertices
             {
@@ -282,21 +282,21 @@ namespace uka
 
             Model(){};
             ~Model();
-            auto load_node(uka::gltf::Node* parent, const tinygltf::Node& node, uint32_t node_index, const tinygltf::Model& model, std::vector<uint32_t>& index_buffer, std::vector<Vertex>& vertex_buffer, float global_scale) ->void;
+            auto load_node(Node* parent, const tinygltf::Node& node, uint32_t node_index, const tinygltf::Model& model, std::vector<uint32_t>& index_buffer, std::vector<Vertex>& vertex_buffer, float global_scale) ->void;
             auto load_skins(tinygltf::Model& gltf_model) ->void;
             auto load_image(tinygltf::Model& gltf_model, uka::Uka_Device* device, VkQueue transfer_queue) ->void;
             auto load_materials(tinygltf::Model& gltf_model) ->void;
             auto load_animations(tinygltf::Model& gltf_model) ->void;
             auto load_form_file(std::string filename, uka::Uka_Device* device, VkQueue transfer_queue, uka::gltf::LoadFlags file_loading_flags = LoadFlags::NONE, float scale = 1.0f) ->void;
             auto bind_buffers(VkCommandBuffer commandbuffer) ->void;
-            auto draw_node(uka::gltf::Node* node, VkCommandBuffer commandbuffer, uint32_t render_flags = 0, VkPipelineLayout pipeline_layout = VK_NULL_HANDLE, uint32_t bind_image_set = 1) ->void;
+            auto draw_node(Node* node, VkCommandBuffer commandbuffer, uint32_t render_flags = 0, VkPipelineLayout pipeline_layout = VK_NULL_HANDLE, uint32_t bind_image_set = 1) ->void;
             auto draw(VkCommandBuffer commandbuffer, uint32_t render_flags = 0, VkPipelineLayout pipeline_layout = VK_NULL_HANDLE, uint32_t bind_image_set = 1) ->void;
-            auto get_node_dimensions(uka::gltf::Node* node, glm::vec3& min, glm::vec3& max) ->void;
+            auto get_node_dimensions(Node* node, glm::vec3& min, glm::vec3& max) ->void;
             auto get_scene_dimensions() ->void;
             auto updateAnimation(uint32_t index, float time) ->void;
-            auto find_node(uka::gltf::Node* parent, uint32_t index) -> Node*;
+            auto find_node(Node* parent, uint32_t index) -> Node*;
             auto node_from_index(uint32_t index) -> Node*;
-            auto prepare_node_descriptor_set(uka::gltf::Node* node,VkDescriptorSetLayout descriptor_set_layout) ->void;
+            auto prepare_node_descriptor_set(Node* node,VkDescriptorSetLayout descriptor_set_layout) ->void;
         };
     };
 }
