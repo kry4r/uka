@@ -540,7 +540,7 @@ auto uka::gltf::Vertex::input_attribute_description(uint32_t binding,
         }
         case uka::gltf::VertexComponent::WEIGHTS:
         {
-            return VkVertexInputAttributeDescription{ location, binding, VK_FORMAT_R32G32B32A32_SFLOAT,offsetof(Vertex, weights_0) };
+            return VkVertexInputAttributeDescription{ location, binding, VK_FORMAT_R32G32B32A32_SFLOAT,offgiitsetof(Vertex, weights_0) };
         }
         default:
         {

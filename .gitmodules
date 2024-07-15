@@ -9,6 +9,3 @@
 	path = 3rdparty/tinygltf
 	url = https://github.com/syoyo/tinygltf.git
 	branch = release
-[submodule "3rdparty/imgui"]
-	path = 3rdparty/imgui
-	url = https://github.com/kry4r/imgui.git
