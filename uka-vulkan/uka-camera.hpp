@@ -6,7 +6,7 @@
 
 namespace uka{
 
-    struct Camera
+    struct Uka_Camera
     {
         private:
         float zn,zf,fov;

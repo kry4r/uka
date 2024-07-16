@@ -9,3 +9,7 @@
 	path = 3rdparty/tinygltf
 	url = https://github.com/syoyo/tinygltf.git
 	branch = release
+[submodule "imgui"]
+	path = 3rdparty/imgui
+	url = https://github.com/kry4r/imgui.git
+	branch = vulkan

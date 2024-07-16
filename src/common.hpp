@@ -8,10 +8,12 @@
 #include <map>
 #include <unordered_map>
 #include "algorithm"
-
+#include "glm/glm.hpp"
+#include "vulkan/vulkan.hpp"
 #include "../uka-vulkan/uka-device.hpp"
 #include "../uka-vulkan/uka-texture.hpp"
 #include "../uka-vulkan/uka-model.hpp"
+#include "../uka-vulkan/uka-framebuffer.hpp"
 
 #define LIGHT_COUNT 3
 
@@ -36,17 +38,11 @@ namespace uka{
         struct Models
         {
             gltf::Model model;
-            gltf::Uka_Model skybox;
+            gltf::Model skybox;
         };
 
-        struct UniformBufferSet
-        {
-            Uka_Buffer scene;
-            Uka_Buffer skybox;
-            Uka_Buffer params;
-        };
 
-        struct UBOMatrices
+        struct UniformDataOffscreen
         {
             glm::mat4 projection{ 1.0f };
             glm::mat4 model{ 1.0f };
@@ -86,9 +82,9 @@ namespace uka{
 
         struct PipeLines
         {
-            Uka_Pipeline offscreen_pass;
-            Uka_Pipeline deferred_pass;
-            Uka_Pipeline shadow_pass;
+            VkPipeline offscreen_pass;
+            VkPipeline deferred_pass;
+            VkPipeline shadow_pass;
         };
 
         struct DescriptorSets
@@ -97,6 +93,12 @@ namespace uka{
             VkDescriptorSet background{VK_NULL_HANDLE};
             VkDescriptorSet shadow{VK_NULL_HANDLE};
             VkDescriptorSet composition{VK_NULL_HANDLE};
+        };
+
+        struct FrameBuffers
+        {
+            Uka_Framebuffer* deferred;
+            Uka_Framebuffer* shadow;
         };
 
 
